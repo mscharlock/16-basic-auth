@@ -1,5 +1,5 @@
 'use strict';
-
+//file for creating our mock users - we use faker to generate the data//
 const User = require('../../model/user');
 const faker = require('faker');
 

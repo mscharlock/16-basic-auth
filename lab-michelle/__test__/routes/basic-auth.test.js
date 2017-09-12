@@ -12,6 +12,8 @@ describe('Testing basic auth routes', function() {
   afterAll(server.stop);
   afterEach(mocks.user.removeAll);
 
+
+  //POST
   describe('POST to /api/signup', function() {
     beforeAll(() => {
       this.mockUserData = {
@@ -26,15 +28,24 @@ describe('Testing basic auth routes', function() {
       .catch(console.error);
     });
 
-    test('should respond with a token', () => {
-      expect(this.res.text).toBeTruthy();
-      expect(this.res.text.length > 1).toBeTruthy();
+    describe('Valid Requests', () => {
+      test('should respond with a token', () => {
+        expect(this.res.text).toBeTruthy();
+        expect(this.res.text.length > 1).toBeTruthy();
+      });
+      test('should return a status of 201', () => {
+        expect(this.res.status).toBe(201);
+      });
     });
-    test('should return a status of 201', () => {
-      expect(this.res.status).toBe(201);
+    describe('Invalid Requests', () => {
+      test('should return a status of 400 given an invalid req', () => {
+        expect(this.res.status).toBe(400);
+      });
     });
   });
 
+
+  //GET
   describe('GET to /api/signin', function() {
     beforeAll(() => {
       return mocks.user.createOne()
@@ -45,17 +56,24 @@ describe('Testing basic auth routes', function() {
         .then(res => this.res = res);
       });
     });
+    describe('Valid Requests', () => {
+      test('should return a token', () => {
+        expect(this.res.text).toBeTtoBeTruthy();
+        expect(this.res.text.length > 1).toBeTruthy();
+      });
+    });
     test('should return a token', () => {
-      expect(this.res.text).toBeTtoBeTruthy();
+      expect(this.res.text).toBeTruthy();
       expect(this.res.text.length > 1).toBeTruthy();
     });
-  });
-  test('should return a token', () => {
-    expect(this.res.text).toBeTruthy();
-    expect(this.res.text.length > 1).toBeTruthy();
-  });
 
-  test('should return a status of 200', ()=> {
-    expect(this.res.status).toBe(200);
+    test('should return a status of 200', ()=> {
+      expect(this.res.status).toBe(200);
+    });
+  });
+  describe('Invalid Requests', () => {
+    test('should return a status of 401', () => {
+      expect(this.res.status).toBe(401);
+    });
   });
 });

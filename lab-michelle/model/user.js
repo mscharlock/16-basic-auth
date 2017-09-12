@@ -1,5 +1,6 @@
 'use strict';
 
+//req dependencies
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -40,11 +41,12 @@ User.methods.comparePasswordHash = function(password) {
 User.methods.generateFindHash = function() {
 
   return new Promise((resolve, reject) => {
-    let tries = 0; ;
+    let tries = 0;
     //grabbing the context of user
     _generateFindHash.call(this);
   });
 
+  //helper function which converts findhash on a user into 32 bit hex, which we save into user's info on Mongo, then we resolve our promise to generate a findhash by attempting to generate this hash 3 times. If it doesn't work, throw an error.
   function _generateFindHash() {
     this.findhash = crypto.randomBytes(32).toString('hex');
     this.save()
@@ -56,10 +58,10 @@ User.methods.generateFindHash = function() {
       }
       if (err) return reject (err);
     });
-  };
-});
+  }
 };
 
+//Creates a token using the findhash through json web token process, then does something with the APP_SECRET environment variable
 User.methods.generateToken = function() {
 
   return new Promise((resolve, reject) => {
@@ -72,4 +74,5 @@ User.methods.generateToken = function() {
   });
 };
 
+//finally we export the model at the bottom of the page after everything is done
 module.exports = mongoose.model('user', User);

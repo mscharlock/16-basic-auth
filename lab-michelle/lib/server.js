@@ -20,11 +20,13 @@ app.use(require('body-parser').json());
 app.use(require('cors')());
 app.use(router);
 
+//catch all for errors is our 404
 app.all('/*', (req, res) => res.sendStatus(404));
 
 const server = module.exports = {};
 
 server.isOn = false;
+//method of starting the server up - checks if it is on, then if it is not, starts listening for it and changes our flag to true for server.isOn
 server.start = () => {
   return new Promise((resolve, reject) => {
     if(!server || !server.isOn) {
@@ -39,6 +41,7 @@ server.start = () => {
   });
 };
 
+//reverse of other method above
 server.stop = () => {
   return new Promise((resolve, reject) => {
     if(server.http && server.isOn) {

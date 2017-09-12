@@ -10,6 +10,13 @@ Download from npm
 
 Install dependencies with npm -i
 
+Create a .env file with the following specs:
+```
+MONGODB_URI='mongodb://localhost/cf-gram-dev'
+APP_SECRET='your very secure password'
+PORT=4444
+```
+
 # Endpoints
 **/api/signup**
 + Accepts POST requests
