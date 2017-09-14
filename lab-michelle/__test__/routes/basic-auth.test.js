@@ -5,7 +5,7 @@ const mocks = require('../lib/mocks');
 const User = require('../../model/user');
 const superagent = require('superagent');
 const server = require('../../lib/server');
-require('jest');
+// require('jest');
 
 describe('Testing basic auth routes', function() {
   beforeAll(server.start);
