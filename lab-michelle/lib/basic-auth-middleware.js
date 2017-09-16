@@ -18,7 +18,7 @@ module.exports = function(req, res, next) {
   let [username, password] = Buffer.from(base64Str, 'base64').toString().split(':');
 
   //this gives us the unhashed and actual data?
-  req.auth = { username, password};
+  req.auth = { username, password };
 
   if(!req.auth.username) return next(new Error('authorization failed, username required'));
   if(!req.auth.password) return next(new Error('authorization failed, password required'));
