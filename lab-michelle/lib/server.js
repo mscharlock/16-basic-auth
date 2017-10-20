@@ -14,6 +14,7 @@ let wat = mongoose.connect(process.env.MONGODB_URI, {useMongoClient: true});
 
 //middleware for router
 require('../route/route-auth')(router);
+require('../route/route-gallery')(router);
 
 //mount middleware
 app.use(require('body-parser').json());

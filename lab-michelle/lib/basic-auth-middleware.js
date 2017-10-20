@@ -1,5 +1,6 @@
 'use strict';
 
+const errorHandler = require('./error-handler');
 const debug = require('debug')('cfgram:basic-auth-middleware');
 
 module.exports = function(req, res, next) {
@@ -8,7 +9,7 @@ module.exports = function(req, res, next) {
   //get the headers, look for authentication
   let authHeaders = req.headers.authorization;
   //if no headers, error//
-  if(!authHeaders) return next(new Error('authorization failed, auth headers required'));
+  if(!authHeaders) return errorHandler(new Error('authorization failed, auth headers required'));
 
   //parse the username/password from base64 into useable pieces
   let base64Str = authHeaders.split('Basic ')[1];
