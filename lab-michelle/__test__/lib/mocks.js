@@ -16,15 +16,15 @@ mocks.user.createOne = function() {
   });
 
   return user.generatePasswordHash(result.password)
-  .then(user => {
-    result.user = user;
-    return user.save();
-  })
-  .then(user => user.generateToken())
-  .then(token => {
-    result.token = token;
-    return result;
-  });
+    .then(user => {
+      result.user = user;
+      return user.save();
+    })
+    .then(user => user.generateToken())
+    .then(token => {
+      result.token = token;
+      return result;
+    });
 };
 
 mocks.user.removeAll = function() {

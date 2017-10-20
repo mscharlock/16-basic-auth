@@ -60,3 +60,5 @@ typings/
 #Other things
 node_modules
 test.env
+/db
+/data

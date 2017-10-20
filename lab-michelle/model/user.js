@@ -43,8 +43,6 @@ User.methods.generateFindHash = function() {
   return new Promise((resolve, reject) => {
     let tries = 0;
     //grabbing the context of user
-    _generateFindHash.call(this);
-  });
 
   //helper function which converts findhash on a user into 32 bit hex, which we save into user's info on Mongo, then we resolve our promise to generate a findhash by attempting to generate this hash 3 times. If it doesn't work, throw an error.
   function _generateFindHash() {
@@ -56,7 +54,7 @@ User.methods.generateFindHash = function() {
         tries++;
         _generateFindHash.call(this);
       }
-      if (err) return reject (err);
+      if (err) return reject(err);
     });
   }
 };
